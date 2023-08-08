@@ -1,0 +1,55 @@
+package smokeTest;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ExcelRead {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Admin08\\Downloads\\chromedriver_win32 (3)\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		  FileInputStream fis = new FileInputStream("C:\\Users\\Admin08\\Downloads\\Invoice csv (3)data.csv");
+		  
+		  driver.get("https://qa.fundtap.co/");
+		  
+		//Login
+			driver.findElement(By.name("email")).sendKeys("info@fundtap.co");
+			driver.findElement(By.name("password")).sendKeys("34Test12test$");
+			driver.findElement(By.id("btnLogin")).click();
+		  
+		  //Creating a workbook
+		  XSSFWorkbook workbook = new XSSFWorkbook(fis);
+		  XSSFSheet sheet = workbook.getSheetAt(0);
+		  Row row = sheet.getRow(0);
+		  Cell cell = row.getCell(0);
+		  System.out.println(sheet.getRow(0).getCell(0));
+		  Row row1 = sheet.getRow(1);
+		  Cell cell1 = row1.getCell(1);
+		  System.out.println(sheet.getRow(0).getCell(1));
+		  Row row2 = sheet.getRow(1);
+		  Cell cell2 = row2.getCell(1);
+		  System.out.println(sheet.getRow(1).getCell(0));
+		  Row row3 = sheet.getRow(1);
+		  Cell cell3 = row3.getCell(1);
+		  System.out.println(sheet.getRow(1).getCell(1));
+		  
+		  String cellval = cell.getStringCellValue();
+		  System.out.println(cellval);
+		 
+		  cell1.getNumericCellValue();
+		  cell2.getNumericCellValue();
+		  cell3.getNumericCellValue();
+		  workbook.close();
+	}
+
+}
