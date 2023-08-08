@@ -1,0 +1,61 @@
+package smokeTest;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class Link_accounting_software {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Admin08\\Downloads\\chromedriver_win32 (3)\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+
+		driver.manage().window().maximize();
+
+		driver.get("https://qa.fundtap.co/");
+
+		// Login
+		driver.findElement(By.name("email")).sendKeys("test56@mailinator.com");
+		driver.findElement(By.name("password")).sendKeys("A@345678g");
+		driver.findElement(By.id("btnLogin")).click();
+		
+		//Link to accounting software
+	/*	JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        Thread.sleep(2000);
+		WebElement button =  driver.findElement(By.linkText("Link To Accounting Software"));
+		js.executeScript("arguments[0].scrollIntoView()", button);
+        button.click();
+        
+        WebElement Xero= driver.findElement(By.className("event-Xero_accountingSoftware"));
+        js.executeScript("arguments[0].scrollIntoView()", Xero);
+        Xero.click();
+    */  
+		
+		//Xero connection
+		Thread.sleep(2000);
+        Actions a = new Actions(driver);
+        a.sendKeys(Keys.PAGE_DOWN).build().perform();
+        Thread.sleep(1000);
+        driver.findElement(By.linkText("Link To Accounting Software")).click();
+        
+        Thread.sleep(3000);
+        a.sendKeys(Keys.PAGE_UP).build().perform();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//body/section/div[2]/div/div/div/div/div/div[3]/div/div/a")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.cssSelector("a.btn.btn-success.btn-sm.btnsubmit.sync_invoices_link")).click();
+        
+        //feeding credentendials to login
+        driver.findElement(By.id("xl-form-email")).sendKeys("mejora.test@outlook.com");
+        driver.findElement(By.id("xl-form-password")).sendKeys("Mejora@123");
+        driver.findElement(By.id("xl-form-submit")).click();
+        
+       
+	}
+
+}
