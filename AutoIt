@@ -1,0 +1,24 @@
+package smokeTest;
+
+import java.io.IOException;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class AutoIt {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Admin08\\Downloads\\chromedriver_win32 (3)\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+	
+		driver.get("https://ps.uci.edu/~franklin/doc/file_upload.html");
+		//WebElement browse= driver.findElement(By.name ("userfile"));
+		//browse.click();
+		driver.findElement(By.xpath("//input[1]")).click();
+		//driver.findElement(By.xpath("//input[@value='Send File']")).click();
+	}
+
+}
