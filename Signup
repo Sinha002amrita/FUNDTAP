@@ -1,0 +1,49 @@
+package smokeTest;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class Signup {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Admin08\\Downloads\\chromedriver_win32 (3)\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+	
+		driver.manage().window().maximize();
+		
+	    driver.get("https://qa.fundtap.co/"); 
+		
+		//Signup
+		driver.findElement(By.xpath("//a[@title='Apply Now']")).click();
+		driver.findElement(By.id("name")).sendKeys("demo29");
+		driver.findElement(By.id("last_name")).sendKeys("Test1");
+		driver.findElement(By.id("email")).sendKeys("demo29test1@mailinator.com");
+		driver.findElement(By.id("phonenumber")).sendKeys("1234567789");
+		driver.findElement(By.id("pwd")).sendKeys("1!Asdfghjk");
+		
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,250)", "");
+		driver.findElement(By.cssSelector("button.btn.btn-default.btn-block.parent_button")).click();
+
+		Thread.sleep(2000);
+		Actions action = new Actions(driver);
+		
+		//Logout
+		WebElement profileMenu= driver.findElement(By.cssSelector("a.dropdown-toggle"));
+		action.moveToElement(profileMenu);
+		action.click().build().perform();
+		
+		Thread.sleep(2000);
+		WebElement subMenu= driver.findElement(By.xpath("//div/div/ul/li/ul/li[4]/a"));
+	    action.moveToElement(subMenu);
+	    action.click().build().perform();
+	   
+	}
+
+}
