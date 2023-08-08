@@ -1,0 +1,32 @@
+package smokeTest;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Submit_invoice {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Admin08\\Downloads\\chromedriver_win32 (3)\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+
+		driver.manage().window().maximize();
+
+		driver.get("https://qa.fundtap.co/");
+
+		// Login
+		driver.findElement(By.name("email")).sendKeys("test56@mailinator.com");
+		driver.findElement(By.name("password")).sendKeys("A@345678g");
+		driver.findElement(By.id("btnLogin")).click();
+		
+		Thread.sleep(2000);
+		//Submit Invoice
+		driver.findElement(By.xpath("//body[1]/section[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/form[1]/div[2]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[3]/td[4]")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//input[@id='tsandcs']")).click();
+	    driver.findElement(By.xpath("//input[@value='Accept Quote']")).click();
+	}
+
+}
