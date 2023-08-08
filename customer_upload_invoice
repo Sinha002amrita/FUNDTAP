@@ -1,0 +1,91 @@
+package smokeTest;
+
+import java.io.IOException;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Customer_upload_Invoice {
+
+	public static void main(String[] args) throws InterruptedException, IOException {
+		// TODO Auto-generated method stub
+
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Admin08\\Downloads\\chromedriver_win32 (3)\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+
+		driver.manage().window().maximize();
+
+		driver.get("https://qa.fundtap.co/");
+
+		// Login
+		driver.findElement(By.name("email")).sendKeys("test56@mailinator.com");
+		driver.findElement(By.name("password")).sendKeys("A@345678g");
+		driver.findElement(By.id("btnLogin")).click();
+
+		/*
+		 * Actions action = new Actions(driver);
+		 * 
+		 * //Go to My Invoices WebElement profileMenu=
+		 * driver.findElement(By.cssSelector("a.dropdown-toggle"));
+		 * action.moveToElement(profileMenu); action.click().build().perform();
+		 * 
+		 * Thread.sleep(2000); WebElement subMenu=
+		 * driver.findElement(By.xpath("//div/div/ul/li/ul/li[2]/a"));
+		 * action.moveToElement(subMenu); Thread.sleep(2000);
+		 * action.click().build().perform();
+		 */
+
+		Thread.sleep(3000);
+		 JavascriptExecutor js = (JavascriptExecutor) driver;
+
+	       
+			WebElement tab =  driver.findElement(By.cssSelector("a.btn.btn-success.btn-sm.btnsubmit.upload_invoice_button"));
+			js.executeScript("arguments[0].scrollIntoView()", tab);
+	        tab.click();
+	        
+
+		//driver.findElement(By.cssSelector("a.btn.btn-success.btn-sm.btnsubmit.upload_invoice_button")).click();
+		Thread.sleep(2000);
+
+    	// Upload Invoices (Single)
+		driver.findElement(By.name("invoice_number")).sendKeys("INVC001");
+		driver.findElement(By.name("debtor")).sendKeys("Harrie");
+
+		driver.findElement(By.xpath("//input[@id='issue_date']")).click();
+		driver.findElement(By.xpath("//div/table/tbody/tr[5]/td[3]/a")).click();
+		driver.findElement(By.xpath("//input[@id='payment_date']")).click();
+		driver.findElement(By.xpath("//select[@class='ui-datepicker-month']")).click();
+		driver.findElement(By.xpath("//div/div/div/select/option[11]")).click();
+		driver.findElement(By.xpath("//div/table/tbody/tr[4]/td[1]/a")).click();
+		driver.findElement(By.name("invoice_total")).sendKeys("100");
+
+		Thread.sleep(4000);
+
+		
+
+		WebElement upload_file = driver.findElement(By.xpath("//input[@name='copy_of_invoice']"));
+		System.out.print((upload_file).getText());
+		js.executeScript("arguments[0].scrollIntoView()", upload_file);
+
+		upload_file.sendKeys("C:\\Users\\Admin08\\Downloads\\inv2.png");
+
+		WebElement Element = driver.findElement(By.xpath(
+				"//body/section[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[9]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/form[2]/button[1]"));
+		Element.click();
+
+	/*	// Upload Invoices (Bulk)
+		WebElement upload_file2 = driver.findElement(By.xpath("//input[@name='bulk_invoices']"));
+		upload_file2.sendKeys("C:\\Users\\Admin08\\Downloads\\Invoice csv (3)data.csv");
+
+		WebElement Element2 = driver.findElement(
+				By.xpath("//body/section/div[2]/div/div/div/div/div[9]/div/div/div/div/div/div/div/form[1]/button"));
+		Element2.click();
+*/
+	   // driver.findElement(By.xpath("//input[@name='bulk_invoices']")).click();
+	  //Runtime.getRuntime().exec("C:\\Users\\Admin08\\Desktop\\Autoit script.exe");
+   }
+
+}
